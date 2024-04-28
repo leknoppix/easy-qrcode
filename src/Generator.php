@@ -175,6 +175,12 @@ class Generator
             $qrCode = $merger->merge($this->imagePercentage);
         }
 
+        if ($this->imageMerge !== null && $this->format === 'svg') {
+            $merge = new ImageMergeSvg(new SVGString($qrCode), new SVGString($this->imageMerge));
+            $qrCode = $merge->merge($this->imagePercentage);
+        }
+
+
         if ($filename) {
             file_put_contents($filename, $qrCode);
 
